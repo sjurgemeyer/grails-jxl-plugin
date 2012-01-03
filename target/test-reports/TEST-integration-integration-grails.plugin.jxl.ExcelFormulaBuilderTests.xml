@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Shaun-Jurgemeyers-MacBook-Pro.local" name="grails.plugin.jxl.ExcelFormulaBuilderTests" tests="1" time="4.768" timestamp="2011-12-18T22:09:02">
+  <properties />
+  <testcase classname="grails.plugin.jxl.ExcelFormulaBuilderTests" name="testNumberToLetter" time="4.757" />
+  <system-out><![CDATA[--Output from testNumberToLetter--
+]]></system-out>
+  <system-err><![CDATA[--Output from testNumberToLetter--
+]]></system-err>
+</testsuite>
