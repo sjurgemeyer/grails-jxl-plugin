@@ -5,10 +5,6 @@ import jxl.write.WritableFont.*
 
 class ExcelUtils {
 
-    def addCell(sheet, int columnIndex, int rowIndex, value) {
-        sheet.addCell(createCell(columnIndex, rowIndex, value))
-    }
-
     void copyCellFormatWithValue(sheet, origCol, origRow, newCol, newRow, newValue) {
         
         def format = sheet.getCell(origCol,origRow).cellFormat
@@ -42,9 +38,9 @@ class ExcelUtils {
         sheet.removeRow(templateRow)
     }
 
-    public Cell getCell(sheet, col, row) {
+    public Cell getCell(sheet, int col, int row, Map props=[:]) {
         def jxlCell = sheet.getCell(col,row)
-        new Cell(jxlCell)         
+        new Cell(jxlCell, props)         
     }
 
     private void eachCell(sheet,cellList,Closure closure) {
@@ -59,7 +55,7 @@ class ExcelUtils {
     public void addData(sheet,rowData,startCol=0,startRow=0) {
         rowData.eachWithIndex { row, rowNumber ->
             row.eachWithIndex { col, colNumber -> 
-                addFormattedCell(sheet, startCol+colNumber, startRow+rowNumber, col)
+                new Cell(startCol+colNumber, startRow+rowNumber, col).write(sheet)
             }
         }
     }

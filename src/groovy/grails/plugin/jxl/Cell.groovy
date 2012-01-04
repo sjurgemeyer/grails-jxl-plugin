@@ -22,15 +22,6 @@ class Cell {
         } else throw new MissingMethodException(name, delegate, args)
     }
 
-    def borderMethod(String borderName) {
-        setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle."${toStaticField(borderName)}")
-        this
-    }
-
-    def toStaticField(String s) {
-        s.replaceAll(/([A-Z])/) { "_${it[0]}" }.toUpperCase()
-    }
-
     def propertyMissing(String name) {
         if (jxlCell.hasProperty(name)) return jxlCell."$name" 
         throw new MissingPropertyException(name)
@@ -41,7 +32,7 @@ class Cell {
         else if (format.hasProperty(name)) format."$name" = value
         else throw new MissingPropertyException(name)
     }
- 
+
     public Cell (int columnIndex, int rowIndex, java.lang.Number value, Map props=[:]) {
         jxlCell = new jxl.write.Number(columnIndex, rowIndex, value)
         this.properties = props
@@ -71,20 +62,31 @@ class Cell {
         this.properties = props
     }
 
-    public Cell (jxl.write.biff.CellValue existingCell) {
+    public Cell (jxl.write.biff.CellValue existingCell, Map props=[:]) {
         
         jxlCell =createJxlCell(existingCell)
         font = existingCell?.cellFormat?.font?new WritableFont(existingCell.cellFormat.font):new WritableFont(ARIAL)
         format = existingCell?.cellFormat?new WritableCellFormat(existingCell.cellFormat):new WritableCellFormat(font)
         jxlCell.cellFormat = format
+        this.properties = props
     }
 
-    public Cell (jxl.biff.EmptyCell existingCell) {
+    public Cell (jxl.biff.EmptyCell existingCell, Map props=[:]) {
         
         jxlCell = new jxl.write.Label(existingCell.col, existingCell.row, "")
         font = existingCell?.cellFormat?.font?new WritableFont(existingCell.cellFormat.font):new WritableFont(ARIAL)
         format = existingCell?.cellFormat?new WritableCellFormat(existingCell.cellFormat):new WritableCellFormat(font)
         jxlCell.cellFormat = format
+        this.properties = props
+    }
+
+    private def borderMethod(String borderName) {
+        setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle."${toStaticField(borderName)}")
+        this
+    }
+
+    private def toStaticField(String s) {
+        s.replaceAll(/([A-Z])/) { "_${it[0]}" }.toUpperCase()
     }
 
     private def createJxlCell(jxl.write.biff.CellValue cell) {
@@ -93,12 +95,11 @@ class Cell {
 
     private void setProperties(Map props) {
         if (props.font) {
-            println "setting font to ${props.font}"
+            println "Setting font to ${props.font}"
             this.font = new WritableFont(new WritableFont.FontName(props.font))
-            props.remove('font')
         }
         props.each { key, value ->
-            this."$key" = value
+            if (key != 'font') this."$key" = value
         }
     }
 
@@ -113,17 +114,17 @@ class Cell {
         this
     }
 
-    Cell thinBorder() {
-        setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN)
-        this
-    }
-
     Cell italic() {
         font.italic = true
         this
     }
 
     Cell center() {
+        format.alignment = jxl.format.Alignment.CENTRE
+        this
+    }
+    
+    Cell centre() {
         format.alignment = jxl.format.Alignment.CENTRE
         this
     }

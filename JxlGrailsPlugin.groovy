@@ -15,7 +15,7 @@ class JxlGrailsPlugin {
     def author = "Shaun Jurgemeyer"
     def authorEmail = ""
     def description = '''\
-Brief summary/description of the plugin.
+    Plugin for exporting data to Excel format using the JXL library.
 '''
 
     // URL to the plugin's documentation

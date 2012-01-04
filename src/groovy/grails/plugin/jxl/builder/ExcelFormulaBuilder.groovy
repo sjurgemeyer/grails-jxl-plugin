@@ -2,16 +2,16 @@ package grails.plugin.jxl
 class ExcelFormulaBuilder {
     private static final String letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-    static String cell(int colNum, int rowNum) {
+    String cell(int colNum, int rowNum) {
         def col = numberToLetter(colNum)
         "$col${rowNum+1}"
     }
 
-    static String range(int colStart, int rowStart, int colEnd, int rowEnd) {
+    String range(int colStart, int rowStart, int colEnd, int rowEnd) {
         "${cell(colStart, rowStart)}:${cell(colEnd, rowEnd)}"
     }
 
-    static String numberToLetter(int num) {
+    String numberToLetter(int num) {
        num = num+1
        String result = ''
        while (num > 0) {
