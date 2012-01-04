@@ -1,11 +1,11 @@
 package grails.plugin.jxl
 
+import static ExcelFormulaBuilder.*
 class ExcelFormulaBuilderTests {
     
     def letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     def testNumberToLetter() {
         assert true
-        com.gdb.GdbShell.gdb() 
         def builder = new ExcelFormulaBuilder()
         (0..25).each {
             assert letters[it] == builder.numberToLetter(it)
@@ -16,6 +16,12 @@ class ExcelFormulaBuilderTests {
         (260..285).each {
             assert "J${letters[it-260]}" == builder.numberToLetter(it)
         }
+    }
+
+
+    def testDynamicMethods() {
+        def builder = new ExcelFormulaBuilder()
+        assert "=SUM(A1:A5)" == builder.sum(range(0,1,0,5))
     }
 
 

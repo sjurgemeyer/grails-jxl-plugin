@@ -1,0 +1,23 @@
+<plugin name='jxl' version='0.1' grailsVersion='2.0 &gt; *'>
+  <author>Your name</author>
+  <title>Jxl Plugin</title>
+  <description>Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/jxl</documentation>
+  <type>JxlGrailsPlugin</type>
+  <resources />
+  <repositories>
+    <repository name='grailsCentral' url='http://plugins.grails.org' />
+    <repository name='http://repo.grails.org/grails/plugins' url='http://repo.grails.org/grails/plugins/' />
+    <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
+    <repository name='grailsCore' url='http://svn.codehaus.org/grails/trunk/grails-plugins' />
+  </repositories>
+  <dependencies>
+    <runtime>
+      <dependency group='net.sourceforge.jexcelapi' name='jxl' version='2.6.12' />
+    </runtime>
+  </dependencies>
+  <plugins />
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>

@@ -1,9 +1,14 @@
 package grails.plugin.jxl
 class ExcelFormulaBuilder {
-    static final String letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    static String sum(colNum, startRow, endRow) {
+    private static final String letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    static String cell(int colNum, int rowNum) {
         def col = numberToLetter(colNum)
-        return "=SUM($colNum$startRow:$colNum$endRow)" 
+        "$col${rowNum+1}"
+    }
+
+    static String range(int colStart, int rowStart, int colEnd, int rowEnd) {
+        "${cell(colStart, rowStart)}:${cell(colEnd, rowEnd)}"
     }
 
     static String numberToLetter(int num) {
@@ -15,5 +20,9 @@ class ExcelFormulaBuilder {
            num = (num-1)/26
        }
        result
+    }
+
+    def methodMissing(String name, args) {
+        "=${name.toUpperCase()}(${args.join(',')})"
     }
 }
