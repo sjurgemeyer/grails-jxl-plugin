@@ -1,4 +1,4 @@
-package grails.plugin.jxl
+package grails.plugin.jxl.builder
 class ExcelFormulaBuilder {
     private static final String letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
