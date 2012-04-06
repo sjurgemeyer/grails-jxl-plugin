@@ -21,9 +21,9 @@ log4j = {
            'net.sf.ehcache.hibernate'
 
     warn   'org.mortbay.log'
-
     //TODO Set this to something reasonable
     debug 'grails.plugin.jxl'
 }
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
+grails.mime.types.excel = 'application/excel'

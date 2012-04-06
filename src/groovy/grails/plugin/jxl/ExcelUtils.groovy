@@ -68,4 +68,8 @@ class ExcelUtils {
         jxl.Workbook.createWorkbook(file)
     }
 
+    public def createWorkbook(OutputStream stream) {
+        jxl.Workbook.createWorkbook(stream)
+    }
+
 }

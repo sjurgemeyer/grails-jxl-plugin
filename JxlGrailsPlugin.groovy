@@ -1,6 +1,7 @@
+import grails.plugin.jxl.builder.*
 class JxlGrailsPlugin {
     // the plugin version
-    def version = "0.51"
+    def version = "0.52"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.6 > *"
     // the other plugins this plugin depends on
@@ -47,7 +48,12 @@ class JxlGrailsPlugin {
     }
 
     def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
+       application.controllerClasses.toList()*.metaClass*.renderExcel= {  Closure closure ->
+           def stream = new ByteArrayOutputStream()
+           workbook(stream, closure)
+           response.contentType = 'application/excel'
+           response.outputStream << stream.toByteArray()
+        }
     }
 
     def doWithApplicationContext = { applicationContext ->

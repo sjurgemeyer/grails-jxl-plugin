@@ -1,7 +1,8 @@
-<plugin name='jxl' version='0.1' grailsVersion='2.0 &gt; *'>
-  <author>Your name</author>
+<plugin name='jxl' version='0.51' grailsVersion='1.3.6 &gt; *'>
+  <author>Shaun Jurgemeyer</author>
+  <authorEmail>sjurgemeyer@gmail.com</authorEmail>
   <title>Jxl Plugin</title>
-  <description>Brief summary/description of the plugin.
+  <description>    Plugin for exporting data to Excel using the JXL library.  The plugin allows for formatting as well as formula generation using dynamic methods.
 </description>
   <documentation>http://grails.org/plugin/jxl</documentation>
   <type>JxlGrailsPlugin</type>
@@ -11,6 +12,7 @@
     <repository name='http://repo.grails.org/grails/plugins' url='http://repo.grails.org/grails/plugins/' />
     <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
     <repository name='grailsCore' url='http://svn.codehaus.org/grails/trunk/grails-plugins' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
   </repositories>
   <dependencies>
     <runtime>

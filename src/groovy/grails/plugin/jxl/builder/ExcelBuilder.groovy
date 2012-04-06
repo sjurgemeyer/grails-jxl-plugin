@@ -17,6 +17,14 @@ class ExcelBuilder {
         workbook.close()
     }
 
+    def workbook(OutputStream stream, Closure closure) {
+        this.workbook = createWorkbook(stream)
+        sheetIndex = 0
+        closure()
+        workbook.write()
+        workbook.close()
+    }
+
     def sheet(String name="Sheet$sheetIndex", Closure closure) {
         this.sheet = workbook.createSheet(name, sheetIndex++)
         this.cells = []
@@ -27,14 +35,12 @@ class ExcelBuilder {
     }
 
     def cell(int col, int row, value, Map props=[:]) {
-        println "first method $col $row"
         def newCell = new Cell(col, row, value, props)
         cells << newCell
         newCell
     }
 
     def cell(int col, int row, Map props=[:]) {
-        println "second method"
         def newCell = getCell(sheet, col, row, props)
         cells << newCell
         newCell
