@@ -34,8 +34,5 @@ grails.project.dependency.resolution = {
         build ":release:2.0.0", {
             export = false
         }
-        …
     }
-    
-
 }
