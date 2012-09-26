@@ -1,4 +1,5 @@
 package grails.plugin.jxl.builder
+
 class ExcelFormulaBuilder {
     private static final String letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -12,10 +13,10 @@ class ExcelFormulaBuilder {
     }
 
     String numberToLetter(int num) {
-       num = num+1
+       num++
        String result = ''
        while (num > 0) {
-           int remainder = num%26
+           int remainder = num % 26
            result = letters[remainder-1] + result
            num = (num-1)/26
        }

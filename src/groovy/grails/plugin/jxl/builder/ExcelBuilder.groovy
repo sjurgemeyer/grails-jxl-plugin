@@ -1,4 +1,5 @@
 package grails.plugin.jxl.builder
+
 import grails.plugin.jxl.*
 
 @Mixin(ExcelUtils)
