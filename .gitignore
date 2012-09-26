@@ -1,4 +1,4 @@
-stacktrace.log
+*.log
 /dist
 /idea-target
 target/*
@@ -6,8 +6,6 @@ target/*
 /grails.iws
 .gradle
 .DS_Store
-.classpath
-.project
 .settings
 /*/build/*
 /*/.settings/*
@@ -15,5 +13,5 @@ target/*
 /*/*.iml
 *.jar
 *.zip
-.svn
-
+web-app/
+plugin.xml
