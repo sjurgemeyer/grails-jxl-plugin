@@ -1,12 +1,14 @@
 package grails.plugin.jxl
 
-import static ExcelFormulaBuilder.*
-class ExcelFormulaBuilderTests {
-    
-    def letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    def testNumberToLetter() {
-        assert true
-        def builder = new ExcelFormulaBuilder()
+import grails.plugin.jxl.builder.ExcelFormulaBuilder
+
+class ExcelFormulaBuilderTests extends GroovyTestCase {
+
+    private letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+	 private ExcelFormulaBuilder builder = new ExcelFormulaBuilder()
+
+    void testNumberToLetter() {
         (0..25).each {
             assert letters[it] == builder.numberToLetter(it)
         }
@@ -18,11 +20,7 @@ class ExcelFormulaBuilderTests {
         }
     }
 
-
-    def testDynamicMethods() {
-        def builder = new ExcelFormulaBuilder()
-        assert "=SUM(A1:A5)" == builder.sum(range(0,1,0,5))
+    void testDynamicMethods() {
+        assert "=SUM(A1:A5)" == builder.sum(builder.range(0,0,0,4))
     }
-
-
 }
