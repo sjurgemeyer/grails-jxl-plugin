@@ -1,7 +1,7 @@
 import grails.plugin.jxl.builder.*
 class JxlGrailsPlugin {
     // the plugin version
-    def version = "0.52"
+    def version = "0.53"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.6 > *"
     // the other plugins this plugin depends on
@@ -11,7 +11,6 @@ class JxlGrailsPlugin {
         "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
     def title = "Jxl Plugin" // Headline display name of the plugin
     def author = "Shaun Jurgemeyer"
     def authorEmail = "sjurgemeyer@gmail.com"

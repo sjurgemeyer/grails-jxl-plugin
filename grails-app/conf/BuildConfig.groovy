@@ -14,6 +14,7 @@ grails.project.dependency.resolution = {
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         grailsCentral()
+        grailsRepo "http://grails.org/plugins"
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenCentral()
@@ -30,6 +31,11 @@ grails.project.dependency.resolution = {
         runtime 'net.sourceforge.jexcelapi:jxl:2.6.12'
     }
     plugins {
-		//runtime ':joda-time:1.3'
+        build ":release:2.0.0", {
+            export = false
+        }
+        …
     }
+    
+
 }
