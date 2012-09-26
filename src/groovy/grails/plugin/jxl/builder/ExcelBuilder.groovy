@@ -27,14 +27,12 @@ class ExcelBuilder {
     }
 
     def cell(int col, int row, value, Map props=[:]) {
-        println "first method $col $row"
         def newCell = new Cell(col, row, value, props)
         cells << newCell
         newCell
     }
 
     def cell(int col, int row, Map props=[:]) {
-        println "second method"
         def newCell = getCell(sheet, col, row, props)
         cells << newCell
         newCell

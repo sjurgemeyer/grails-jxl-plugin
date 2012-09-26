@@ -95,7 +95,6 @@ class Cell {
 
     private void setProperties(Map props) {
         if (props.font) {
-            println "Setting font to ${props.font}"
             this.font = new WritableFont(new WritableFont.FontName(props.font))
         }
         props.each { key, value ->
