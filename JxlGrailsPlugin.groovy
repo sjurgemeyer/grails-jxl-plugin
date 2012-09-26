@@ -1,3 +1,5 @@
+import grails.plugin.jxl.builder.ExcelBuilder
+
 class JxlGrailsPlugin {
     def version = "0.53"
     def grailsVersion = "1.3.6 > *"
@@ -14,7 +16,7 @@ class JxlGrailsPlugin {
     def doWithDynamicMethods = { ctx ->
        application.controllerClasses.toList()*.metaClass*.renderExcel = { Closure closure ->
            def stream = new ByteArrayOutputStream()
-           workbook(stream, closure)
+           new ExcelBuilder().workbook(stream, closure)
            response.contentType = 'application/excel'
            response.outputStream << stream.toByteArray()
         }
