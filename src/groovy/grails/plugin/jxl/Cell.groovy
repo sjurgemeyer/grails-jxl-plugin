@@ -1,10 +1,9 @@
 package grails.plugin.jxl
 
-import jxl.*
-import jxl.write.WritableFont
-import jxl.write.WritableCellFormat
 import static jxl.write.WritableFont.*
-
+import jxl.*
+import jxl.write.WritableCellFormat
+import jxl.write.WritableFont
 
 class Cell {
     Class clazz
@@ -15,15 +14,17 @@ class Cell {
     def methodMissing(String name, args) {
         if (font.metaClass.respondsTo(font, name, args)) {
             return font.invokeMethod(name, args)
-        } else if (format.metaClass.respondsTo(format, name, args)) {
+        }
+        if (format.metaClass.respondsTo(format, name, args)) {
             return format.invokeMethod(name, args)
-        } else if (name.endsWith('Border')) {
+        }
+        if (name.endsWith('Border')) {
             borderMethod(name - 'Border')
         } else throw new MissingMethodException(name, delegate, args)
     }
 
     def propertyMissing(String name) {
-        if (jxlCell.hasProperty(name)) return jxlCell."$name" 
+        if (jxlCell.hasProperty(name)) return jxlCell."$name"
         throw new MissingPropertyException(name)
     }
 
@@ -33,27 +34,27 @@ class Cell {
         else throw new MissingPropertyException(name)
     }
 
-    public Cell (int columnIndex, int rowIndex, java.lang.Number value, Map props=[:]) {
+    Cell (int columnIndex, int rowIndex, Number value, Map props=[:]) {
         jxlCell = new jxl.write.Number(columnIndex, rowIndex, value)
         this.properties = props
     }
 
-    public Cell (int columnIndex, int rowIndex, Boolean value, Map props=[:]) {
+    Cell (int columnIndex, int rowIndex, Boolean value, Map props=[:]) {
         jxlCell = new jxl.write.Boolean(columnIndex, rowIndex, value)
         this.properties = props
     }
 
-    public Cell (int columnIndex, int rowIndex, Date value, Map props=[:]) {
+    Cell (int columnIndex, int rowIndex, Date value, Map props=[:]) {
         jxlCell = new jxl.write.DateTime(columnIndex, rowIndex, value)
         this.properties = props
     }
 
-    public Cell (int columnIndex, int rowIndex, Object value, Map props=[:]) {
+    Cell (int columnIndex, int rowIndex, Object value, Map props=[:]) {
         jxlCell = new jxl.write.Blank(columnIndex, rowIndex)
         this.properties = props
     }
 
-    public Cell (int columnIndex, int rowIndex, String value, Map props=[:]) {
+    Cell (int columnIndex, int rowIndex, String value, Map props=[:]) {
         if (value && value[0] == '=') {
             jxlCell = new jxl.write.Formula(columnIndex, rowIndex, value[1..-1])
         } else {
@@ -62,8 +63,8 @@ class Cell {
         this.properties = props
     }
 
-    public Cell (jxl.write.biff.CellValue existingCell, Map props=[:]) {
-        
+    Cell (jxl.write.biff.CellValue existingCell, Map props=[:]) {
+
         jxlCell =createJxlCell(existingCell)
         font = existingCell?.cellFormat?.font?new WritableFont(existingCell.cellFormat.font):new WritableFont(ARIAL)
         format = existingCell?.cellFormat?new WritableCellFormat(existingCell.cellFormat):new WritableCellFormat(font)
@@ -71,8 +72,8 @@ class Cell {
         this.properties = props
     }
 
-    public Cell (jxl.biff.EmptyCell existingCell, Map props=[:]) {
-        
+    Cell (jxl.biff.EmptyCell existingCell, Map props=[:]) {
+
         jxlCell = new jxl.write.Label(existingCell.col, existingCell.row, "")
         font = existingCell?.cellFormat?.font?new WritableFont(existingCell.cellFormat.font):new WritableFont(ARIAL)
         format = existingCell?.cellFormat?new WritableCellFormat(existingCell.cellFormat):new WritableCellFormat(font)
@@ -80,16 +81,16 @@ class Cell {
         this.properties = props
     }
 
-    private def borderMethod(String borderName) {
+    private borderMethod(String borderName) {
         setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle."${toStaticField(borderName)}")
         this
     }
 
-    private def toStaticField(String s) {
+    private toStaticField(String s) {
         s.replaceAll(/([A-Z])/) { "_${it[0]}" }.toUpperCase()
     }
 
-    private def createJxlCell(jxl.write.biff.CellValue cell) {
+    private createJxlCell(jxl.write.biff.CellValue cell) {
         return cell.class.newInstance(cell)
     }
 
@@ -122,7 +123,7 @@ class Cell {
         format.alignment = jxl.format.Alignment.CENTRE
         this
     }
-    
+
     Cell centre() {
         format.alignment = jxl.format.Alignment.CENTRE
         this
@@ -152,6 +153,4 @@ class Cell {
         format.wrap = true
         this
     }
-
 }
-
