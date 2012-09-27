@@ -4,6 +4,7 @@ import grails.plugin.jxl.*
 
 @Mixin(ExcelUtils)
 class ExcelBuilder {
+
     def workbook
     def sheet
     def sheetIndex = 0
@@ -11,6 +12,8 @@ class ExcelBuilder {
     def cells = []
 
     def workbook(String fileName, Closure closure) {
+        closure.resolveStrategy =  Closure.DELEGATE_FIRST
+        closure.delegate = this
         this.workbook = createWorkbook(fileName)
         sheetIndex = 0
         closure()
@@ -19,6 +22,8 @@ class ExcelBuilder {
     }
 
     def workbook(OutputStream stream, Closure closure) {
+        closure.resolveStrategy =  Closure.DELEGATE_FIRST
+        closure.delegate = this
         this.workbook = createWorkbook(stream)
         sheetIndex = 0
         closure()

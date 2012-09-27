@@ -1,7 +1,7 @@
 import grails.plugin.jxl.builder.ExcelBuilder
 
 class JxlGrailsPlugin {
-    def version = "0.53"
+    def version = "0.54"
     def grailsVersion = "1.3.6 > *"
     def title = "Jxl Plugin"
     def author = "Shaun Jurgemeyer"
@@ -17,7 +17,7 @@ class JxlGrailsPlugin {
         
         application.controllerClasses.toList()*.metaClass*.renderExcel = { Closure closure ->
             def stream = new ByteArrayOutputStream()
-            workbook(stream, closure)
+            new ExcelBuilder().workbook(stream, closure)
             response.contentType = 'application/excel'
             response.outputStream << stream.toByteArray()
         }
