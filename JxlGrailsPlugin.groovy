@@ -14,11 +14,12 @@ class JxlGrailsPlugin {
     def scm = [url: "https://github.com/sjurgemeyer/grails-jxl-plugin"]
 
     def doWithDynamicMethods = { ctx ->
-       application.controllerClasses.toList()*.metaClass*.renderExcel = { Closure closure ->
-           def stream = new ByteArrayOutputStream()
-           new ExcelBuilder().workbook(stream, closure)
-           response.contentType = 'application/excel'
-           response.outputStream << stream.toByteArray()
+        
+        application.controllerClasses.toList()*.metaClass*.renderExcel = { Closure closure ->
+            def stream = new ByteArrayOutputStream()
+            workbook(stream, closure)
+            response.contentType = 'application/excel'
+            response.outputStream << stream.toByteArray()
         }
     }
 }
