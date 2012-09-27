@@ -9,7 +9,7 @@ class JxlGrailsPlugin {
     def description = 'Exports data to Excel using the JXL library. The plugin allows for formatting as well as formula generation using dynamic methods.'
     def documentation = "http://grails.org/plugin/jxl"
 
-//    def license = "APACHE"
+    def license = "APACHE"
     def issueManagement = [system: "github", url: "https://github.com/sjurgemeyer/grails-jxl-plugin/issues"]
     def scm = [url: "https://github.com/sjurgemeyer/grails-jxl-plugin"]
 
