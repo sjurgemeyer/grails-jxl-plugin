@@ -28,6 +28,19 @@ class ExcelUtils {
        sheet.mergeCells(startCol, row, endCol, row)
     }
 
+    void autosizeColumn(sheet, int col, value = true) {
+        def columnView = sheet.getColumnView(col)
+        columnView.setAutosize(value)
+
+        sheet.setColumnView(col, columnView)
+    }
+
+    void autosizeColumn(sheet, Range columnRange, value = true) {
+        columnRange.each { int col ->
+            autosizeColumn(sheet, col, value)
+        }
+    }
+
     void withTemplateRow(sheet, templateRow, items, Closure closure) {
         def row = templateRow+1
         items.each {
