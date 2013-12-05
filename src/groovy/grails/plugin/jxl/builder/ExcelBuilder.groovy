@@ -1,6 +1,7 @@
 package grails.plugin.jxl.builder
 
 import grails.plugin.jxl.*
+import jxl.write.WritableHyperlink
 
 @Mixin(ExcelUtils)
 class ExcelBuilder {
@@ -54,5 +55,10 @@ class ExcelBuilder {
 
     def addData(rowData,startCol=0,startRow=0) {
         addData(sheet, rowData, startCol, startRow)
+    }
+
+    def hyperlink(int col, int row, String url) {
+        WritableHyperlink writableHyperlink = new jxl.write.WritableHyperlink( col, row, new URL( url ) )
+        sheet.addHyperlink(writableHyperlink)
     }
 }
