@@ -13,11 +13,20 @@ class JxlGrailsPlugin {
     def issueManagement = [system: "github", url: "https://github.com/sjurgemeyer/grails-jxl-plugin/issues"]
     def scm = [url: "https://github.com/sjurgemeyer/grails-jxl-plugin"]
 
+    def observe = ["controllers"]
+
     def doWithDynamicMethods = { ctx ->
-        
-        application.controllerClasses.toList()*.metaClass*.renderExcel = { Closure closure ->
+        application.controllerClasses.toList().each {
+            attachRenderExcelMethod( it )
+        }
+    }
+
+    def onChange = { event -> attachRenderExcelMethod( event.source ) }
+
+    static def attachRenderExcelMethod = { controller ->
+        controller.metaClass.renderExcel = { Closure closure ->
             def stream = new ByteArrayOutputStream()
-            new ExcelBuilder().workbook(stream, closure)
+            new ExcelBuilder().workbook( stream, closure )
             response.contentType = 'application/excel'
             response.outputStream << stream.toByteArray()
         }
