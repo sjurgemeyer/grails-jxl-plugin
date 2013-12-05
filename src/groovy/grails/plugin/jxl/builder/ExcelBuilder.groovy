@@ -1,6 +1,7 @@
 package grails.plugin.jxl.builder
 
 import grails.plugin.jxl.*
+import jxl.format.PageOrientation
 import jxl.write.WritableHyperlink
 
 @Mixin(ExcelUtils)
@@ -60,5 +61,9 @@ class ExcelBuilder {
     def hyperlink(int col, int row, String url) {
         WritableHyperlink writableHyperlink = new jxl.write.WritableHyperlink( col, row, new URL( url ) )
         sheet.addHyperlink(writableHyperlink)
+    }
+
+    def setOrientation(PageOrientation pageOrientation) {
+        this.sheet.settings.orientation = pageOrientation
     }
 }
